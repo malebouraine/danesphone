@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive AU - Z Flip Style</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Casing Luar / Bodi Ponsel Lipat Z Flip -->
+    <div class="zflip-device">
+        <!-- Kamera & Layar Cover Luar Mini (Estetika Realistis) -->
+        <div class="camera-module">
+            <div class="lens"></div>
+            <div class="lens"></div>
+            <div class="mini-cover-screen">22:45 • 🔋 85%</div>
+        </div>
+
+        <!-- Layar Utama Dalam (Z Flip Aspect Ratio) -->
+        <div class="phone-screen">
+            
+            <!-- Status Bar Android -->
+            <div class="status-bar">
+                <span>22:45</span>
+                <div class="status-icons">📶 🛜 🔋</div>
+            </div>
+
+            <!-- Header Aplikasi Chat -->
+            <div class="chat-header">
+                <div class="profile-pic">T</div>
+                <div class="contact-info">
+                    <h4>Tubatu</h4>
+                    <span class="status-online">online</span>
+                </div>
+            </div>
+
+            <!-- Ruang Pesan / Chat Container -->
+            <div class="chat-container">
+                <div class="message incoming">
+                    <p>Hai... kamu udah bisa tidur belum?</p>
+                    <span class="time">22:44</span>
+                </div>
+                <div class="message outgoing">
+                    <p>Belum nih, masih beresin file web AU. Kenapa emangnya?</p>
+                    <span class="time">22:45</span>
+                </div>
+                <div class="message incoming">
+                    <p>Temenin aku sebentar dong, ada yang mau aku ceritain.</p>
+                    <span class="time">22:45</span>
+                </div>
+            </div>
+
+            <!-- Area Tombol Pilihan Interaktif (Branching Plot) -->
+            <div class="choices-container">
+                <button class="choice-btn" onclick="alert('Kamu memilih: Tanya ceritanya apa')">1. Tanya ceritanya apa</button>
+                <button class="choice-btn" onclick="alert('Kamu memilih: Suruh tidur dulu')">2. Suruh tidur duluan</button>
+            </div>
+
+            <!-- Android Navigation Bar Bawah -->
+            <div class="nav-bar">
+                <div class="nav-icon">◁</div>
+                <div class="nav-icon">◯</div>
+                <div class="nav-icon">▢</div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
