@@ -3,68 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive AU - Z Flip Style</title>
+    <title>Samsung Lockscreen AU</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Casing Luar / Bodi Ponsel Lipat Z Flip -->
-    <div class="zflip-device">
-        <!-- Kamera & Layar Cover Luar Mini (Estetika Realistis) -->
-        <div class="camera-module">
-            <div class="lens"></div>
-            <div class="lens"></div>
-            <div class="mini-cover-screen">22:45 • 🔋 85%</div>
+    <!-- Kerangka Layar Smartphone 6.7 Inch -->
+    <div class="phone-frame-67">
+        
+        <!-- Samsung One UI Status Bar (Atas) -->
+        <div class="samsung-status-bar">
+            <div class="status-left">
+                <span class="time-status">22:45</span>
+            </div>
+            <div class="status-right">
+                <span class="icon">📶</span>
+                <span class="icon">🛜</span>
+                <span class="icon battery-text">85%</span>
+                <span class="icon battery-icon">🔋</span>
+            </div>
         </div>
 
-        <!-- Layar Utama Dalam (Z Flip Aspect Ratio) -->
-        <div class="phone-screen">
+        <!-- Konten Lockscreen -->
+        <div class="lockscreen-content">
+            <!-- Ikon Gembok Keamanan -->
+            <div class="lock-icon">🔒</div>
+
+            <!-- Jam Digital Utama Khas Samsung (Vertikal) -->
+            <div class="samsung-clock">
+                <h1 class="clock-time">22:45</h1>
+                <p class="clock-date">Sabtu, 7 November</p>
+            </div>
+
+            <!-- Notifikasi Contoh di Lockscreen -->
+            <div class="notification-pill">
+                <div class="notif-dot"></div>
+                <span>Tubatu: Pesan baru menunggumu...</span>
+            </div>
+        </div>
+
+        <!-- Bagian Bawah: Shortcut & Navigasi -->
+        <div class="lockscreen-bottom">
+            <div class="shortcut-icon left">📞</div>
             
-            <!-- Status Bar Android -->
-            <div class="status-bar">
-                <span>22:45</span>
-                <div class="status-icons">📶 🛜 🔋</div>
+            <!-- Teks Swipe / Petunjuk Unlock -->
+            <div class="unlock-hint" onclick="alert('Masuk ke beranda AU / Chat!')">
+                Ketuk untuk membuka kunci
             </div>
 
-            <!-- Header Aplikasi Chat -->
-            <div class="chat-header">
-                <div class="profile-pic">T</div>
-                <div class="contact-info">
-                    <h4>Tubatu</h4>
-                    <span class="status-online">online</span>
-                </div>
-            </div>
-
-            <!-- Ruang Pesan / Chat Container -->
-            <div class="chat-container">
-                <div class="message incoming">
-                    <p>Hai... kamu udah bisa tidur belum?</p>
-                    <span class="time">22:44</span>
-                </div>
-                <div class="message outgoing">
-                    <p>Belum nih, masih beresin file web AU. Kenapa emangnya?</p>
-                    <span class="time">22:45</span>
-                </div>
-                <div class="message incoming">
-                    <p>Temenin aku sebentar dong, ada yang mau aku ceritain.</p>
-                    <span class="time">22:45</span>
-                </div>
-            </div>
-
-            <!-- Area Tombol Pilihan Interaktif (Branching Plot) -->
-            <div class="choices-container">
-                <button class="choice-btn" onclick="alert('Kamu memilih: Tanya ceritanya apa')">1. Tanya ceritanya apa</button>
-                <button class="choice-btn" onclick="alert('Kamu memilih: Suruh tidur dulu')">2. Suruh tidur duluan</button>
-            </div>
-
-            <!-- Android Navigation Bar Bawah -->
-            <div class="nav-bar">
-                <div class="nav-icon">◁</div>
-                <div class="nav-icon">◯</div>
-                <div class="nav-icon">▢</div>
-            </div>
-
+            <div class="shortcut-icon right">📷</div>
         </div>
+
+        <!-- Navigasi Bawah / Garis Gesture One UI -->
+        <div class="oneui-gesture-bar"></div>
+
     </div>
 
 </body>
