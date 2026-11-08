@@ -3,61 +3,322 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Samsung Lockscreen AU</title>
+    <title>Interactive AU - Android UI</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Google Material Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
 <body>
 
-    <!-- Kerangka Layar Smartphone 6.7 Inch -->
+    <!-- Bingkai Layar HP 6.7 Inch -->
     <div class="phone-frame-67">
         
-        <!-- Samsung One UI Status Bar (Atas) -->
-        <div class="samsung-status-bar">
+        <!-- Status Bar Global (TSEL, Wi-Fi 5, Baterai Real-Time) -->
+        <div class="vivo-status-bar">
             <div class="status-left">
-                <span class="time-status">22:45</span>
+                <span class="operator-name">TSEL</span>
+                <div class="notif-icons">
+                    <span class="material-symbols-outlined app-notif-icon">phone_android</span>
+                    <span class="app-icon-tiktok">♪</span> 
+                </div>
             </div>
             <div class="status-right">
-                <span class="icon">📶</span>
-                <span class="icon">🛜</span>
-                <span class="icon battery-text">85%</span>
-                <span class="icon battery-icon">🔋</span>
+                <div class="wifi-signal-group">
+                    <span class="material-symbols-outlined wifi-icon">wifi</span>
+                    <span class="wifi-sub-text">5</span>
+                </div>
+                <span class="material-symbols-outlined">signal_cellular_alt</span>
+                <div class="battery-capsule">
+                    <span id="batteryLevel">88%</span>
+                </div>
             </div>
         </div>
 
-        <!-- Konten Lockscreen -->
-        <div class="lockscreen-content">
-            <!-- Ikon Gembok Keamanan -->
-            <div class="lock-icon">🔒</div>
+        <!-- ================= LAYAR 1: LOCKSCREEN DENGAN PIN & REAL-TIME ================= -->
+        <div id="lockscreen" class="screen active">
+            <div class="lockscreen-content">
+                <!-- Ikon Gembok Standar -->
+                <div class="lock-padlock" onclick="hideClockShowPin()">
+                    <span class="material-symbols-outlined">lock</span>
+                </div>
+                
+                <!-- Tampilan Jam Digital Real-Time -->
+                <div id="clockContainer" class="samsung-clock" onclick="hideClockShowPin()">
+                    <h1 class="clock-time" id="liveClock">10:16</h1>
+                    <p class="clock-date" id="liveDate">Sun, 8 November</p>
+                    <p class="unlock-hint" style="margin-top: 10px;">Ketuk gembok atau jam untuk masukkan PIN</p>
+                </div>
 
-            <!-- Jam Digital Utama Khas Samsung (Vertikal) -->
-            <div class="samsung-clock">
-                <h1 class="clock-time">22:45</h1>
-                <p class="clock-date">Sabtu, 7 November</p>
+                <!-- Kotak Masukkan PIN Keamanan -->
+                <div id="pinContainer" class="pin-box-container" style="display: none;">
+                    <p class="pin-title">Masukkan PIN Keamanan</p>
+                    <div class="pin-dots">
+                        <span class="pin-dot" id="dot1"></span>
+                        <span class="pin-dot" id="dot2"></span>
+                        <span class="pin-dot" id="dot3"></span>
+                        <span class="pin-dot" id="dot4"></span>
+                    </div>
+                    <p id="pinError" class="pin-error"></p>
+
+                    <div class="keypad-grid">
+                        <button class="key-btn" onclick="pressKey('1')">1</button>
+                        <button class="key-btn" onclick="pressKey('2')">2</button>
+                        <button class="key-btn" onclick="pressKey('3')">3</button>
+                        <button class="key-btn" onclick="pressKey('4')">4</button>
+                        <button class="key-btn" onclick="pressKey('5')">5</button>
+                        <button class="key-btn" onclick="pressKey('6')">6</button>
+                        <button class="key-btn" onclick="pressKey('7')">7</button>
+                        <button class="key-btn" onclick="pressKey('8')">8</button>
+                        <button class="key-btn" onclick="pressKey('9')">9</button>
+                        <button class="key-btn clear" onclick="clearPin()">C</button>
+                        <button class="key-btn" onclick="pressKey('0')">0</button>
+                        <button class="key-btn enter" onclick="submitPin()">✓</button>
+                    </div>
+                </div>
+
+                <!-- Notifikasi Cepat -->
+                <div class="notification-pill" onclick="hideClockShowPin()">
+                    <span class="notif-dot"></span>
+                    <span>Tubatu: Pesan baru menunggumu...</span>
+                </div>
             </div>
 
-            <!-- Notifikasi Contoh di Lockscreen -->
-            <div class="notification-pill">
-                <div class="notif-dot"></div>
-                <span>Tubatu: Pesan baru menunggumu...</span>
+            <!-- Bagian Bawah Lockscreen -->
+            <div class="lockscreen-bottom">
+                <div class="shortcut-btn"><span class="material-symbols-outlined">call</span></div>
+                <div class="unlock-hint" onclick="hideClockShowPin()">Hint PIN: 3333</div>
+                <div class="shortcut-btn"><span class="material-symbols-outlined">photo_camera</span></div>
             </div>
-        </div>
-
-        <!-- Bagian Bawah: Shortcut & Navigasi -->
-        <div class="lockscreen-bottom">
-            <div class="shortcut-icon left">📞</div>
             
-            <!-- Teks Swipe / Petunjuk Unlock -->
-            <div class="unlock-hint" onclick="alert('Masuk ke beranda AU / Chat!')">
-                Ketuk untuk membuka kunci
-            </div>
-
-            <div class="shortcut-icon right">📷</div>
+            <div class="oneui-gesture-bar" onclick="hideClockShowPin()"></div>
         </div>
 
-        <!-- Navigasi Bawah / Garis Gesture One UI -->
-        <div class="oneui-gesture-bar"></div>
+        <!-- ================= LAYAR 2: HOMESCREEN ================= -->
+        <div id="homescreen" class="screen">
+            <div class="home-grid">
+                <div class="app-icon" onclick="openChatApp()">
+                    <div class="app-logo chat-logo">
+                        <span class="material-symbols-outlined">chat</span>
+                    </div>
+                    <span>Pesan</span>
+                </div>
+                <div class="app-icon" onclick="openApp('galleryapp')">
+                    <div class="app-logo gallery-logo">
+                        <span class="material-symbols-outlined">photo_library</span>
+                    </div>
+                    <span>Galeri</span>
+                </div>
+                <div class="app-icon" onclick="openApp('notesapp')">
+                    <div class="app-logo notes-logo">
+                        <span class="material-symbols-outlined">description</span>
+                    </div>
+                    <span>Catatan</span>
+                </div>
+            </div>
+            <div class="oneui-gesture-bar"></div>
+        </div>
+
+        <!-- ================= LAYAR 3: APLIKASI CHAT ================= -->
+        <div id="chatapp" class="screen">
+            <div class="app-header">
+                <span class="material-symbols-outlined back-btn" onclick="backToHome()">arrow_back</span>
+                <div class="profile-pic">T</div>
+                <div class="contact-info">
+                    <h4>Tubatu</h4>
+                    <span class="status-online">online</span>
+                </div>
+            </div>
+            <div class="chat-container" id="chatContainer">
+                <div class="message incoming">
+                    <p>Akhirnya kamu buka juga web AU-nya. Sini temenin aku ngobrol.</p>
+                    <span class="time">10:17</span>
+                </div>
+                <!-- Typing Indicator -->
+                <div id="typingIndicator" class="message typing">
+                    <div class="typing-dots">
+                        <span></span><span></span><span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="oneui-gesture-bar"></div>
+        </div>
+
+        <!-- ================= LAYAR 4: GALERI FOTO ================= -->
+        <div id="galleryapp" class="screen">
+            <div class="app-header">
+                <span class="material-symbols-outlined back-btn" onclick="backToHome()">arrow_back</span>
+                <h3>Galeri Rahasia</h3>
+            </div>
+            <div class="app-body gallery-grid">
+                <div class="photo-card"><img src="photo_2026-11-08_10-20-44.jpg" alt="Bukti 1"></div>
+                <div class="photo-card locked"><span class="material-symbols-outlined">lock</span></div>
+            </div>
+            <div class="oneui-gesture-bar"></div>
+        </div>
+
+        <!-- ================= LAYAR 5: CATATAN RAHASIA ================= -->
+        <div id="notesapp" class="screen">
+            <div class="app-header">
+                <span class="material-symbols-outlined back-btn" onclick="backToHome()">arrow_back</span>
+                <h3>Catatan Penting</h3>
+            </div>
+            <div class="app-body notes-container">
+                <div class="note-card">
+                    <h4>Password Ruang Bawah Tanah</h4>
+                    <p>Jangan sampai orang lain tahu. Kodenya adalah: <strong>333</strong></p>
+                    <span class="note-date">Dibuat: 8 November</span>
+                </div>
+            </div>
+            <div class="oneui-gesture-bar"></div>
+        </div>
 
     </div>
 
+    <!-- Elemen Audio Efek -->
+    <audio id="clickSound" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" preload="auto"></audio>
+    <audio id="notifSound" src="https://assets.mixkit.co/active_storage/sfx/2354/2354-preview.mp3" preload="auto"></audio>
+
+    <!-- Script JavaScript -->
+    <script>
+        // Suara Klik
+        function playClickAudio() {
+            const audio = document.getElementById('clickSound');
+            audio.currentTime = 0;
+            audio.play().catch(error => console.log("Audio diblokir browser:", error));
+        }
+
+        // Real-Time Clock & Date
+        function updateRealTimeClock() {
+            const now = new Date();
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            hours = hours < 10 ? "0" + hours : hours;
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById('liveClock').innerText = `${hours}:${minutes}`;
+
+            const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            const dayName = days[now.getDay()];
+            const dateNum = now.getDate();
+            const monthName = months[now.getMonth()];
+            document.getElementById('liveDate').innerText = `${dayName}, ${dateNum} ${monthName}`;
+        }
+        updateRealTimeClock();
+        setInterval(updateRealTimeClock, 1000);
+
+        // Real-Time Battery API
+        function initBatteryStatus() {
+            if ('getBattery' in navigator) {
+                navigator.getBattery().then(function(battery) {
+                    function updateBatteryInfo() {
+                        const level = Math.round(battery.level * 100);
+                        document.getElementById('batteryLevel').innerText = level + "%";
+                    }
+                    updateBatteryInfo();
+                    battery.addEventListener('levelchange', updateBatteryInfo);
+                }).catch(error => console.log(error));
+            }
+        }
+        initBatteryStatus();
+
+        // Logika PIN Lockscreen
+        let enteredPin = "";
+        const correctPin = "3333";
+
+        function hideClockShowPin() {
+            playClickAudio();
+            document.getElementById('clockContainer').style.display = 'none';
+            document.getElementById('pinContainer').style.display = 'flex';
+        }
+
+        function pressKey(num) {
+            playClickAudio();
+            if (enteredPin.length < 4) {
+                enteredPin += num;
+                updatePinDots();
+            }
+        }
+
+        function clearPin() {
+            playClickAudio();
+            enteredPin = "";
+            updatePinDots();
+            document.getElementById('pinError').innerText = "";
+        }
+
+        function updatePinDots() {
+            for (let i = 1; i <= 4; i++) {
+                const dot = document.getElementById(`dot${i}`);
+                if (i <= enteredPin.length) {
+                    dot.classList.add('filled');
+                } else {
+                    dot.classList.remove('filled');
+                }
+            }
+        }
+
+        function submitPin() {
+            playClickAudio();
+            if (enteredPin === correctPin) {
+                document.getElementById('lockscreen').classList.remove('active');
+                document.getElementById('homescreen').classList.add('active');
+                enteredPin = "";
+                updatePinDots();
+            } else {
+                document.getElementById('pinError').innerText = "PIN Salah! (Hint: 3333)";
+                enteredPin = "";
+                updatePinDots();
+            }
+        }
+
+        // Navigasi Aplikasi
+        function openChatApp() {
+            playClickAudio();
+            document.getElementById('homescreen').classList.remove('active');
+            document.getElementById('chatapp').classList.add('active');
+            runTypingSequence();
+        }
+
+        function openApp(appId) {
+            playClickAudio();
+            document.getElementById('homescreen').classList.remove('active');
+            document.getElementById(appId).classList.add('active');
+        }
+
+        function backToHome() {
+            playClickAudio();
+            document.getElementById('chatapp').classList.remove('active');
+            document.getElementById('galleryapp').classList.remove('active');
+            document.getElementById('notesapp').classList.remove('active');
+            document.getElementById('homescreen').classList.add('active');
+        }
+
+        // Simulasi Typing di Chat
+        function runTypingSequence() {
+            const typingBox = document.getElementById('typingIndicator');
+            const chatContainer = document.getElementById('chatContainer');
+
+            setTimeout(() => {
+                typingBox.classList.add('active');
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }, 1000);
+
+            setTimeout(() => {
+                typingBox.classList.remove('active');
+                const newMessage = document.createElement('div');
+                newMessage.classList.add('message', 'incoming');
+                newMessage.innerHTML = `
+                    <p>Tadi aku hampir ketahuan nulis rahasia ini sendirian lho...</p>
+                    <span class="time">10:18</span>
+                `;
+                chatContainer.appendChild(newMessage);
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+
+                const notifAudio = document.getElementById('notifSound');
+                if(notifAudio) notifAudio.play().catch(e => console.log(e));
+            }, 3500);
+        }
+    </script>
 </body>
 </html>
+```[cite: 1, 2]
